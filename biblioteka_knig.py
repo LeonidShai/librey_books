@@ -78,6 +78,11 @@ def dobavlenie_udalenie(kniga, operation="add"):
 
 
 def poisk_knigi(kniga):
+    """
+    Функция поиска книг в библиотеке, поддерживает возможность поиска по автору, году, названию
+    :param kniga: str
+    :return: None
+    """
     global katalog_dict
     with open("knigi.json", "r") as file:
         katalog_dict = json.load(file)
@@ -156,6 +161,10 @@ def poisk_knigi(kniga):
 
 
 def console_vvod():
+    """
+    Ввод с консоли названия книг, авторов, операций
+    :return: str
+    """
     global frasa
     frasa = input("Ввод: ")
     return frasa
