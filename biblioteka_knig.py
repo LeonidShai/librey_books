@@ -9,7 +9,7 @@ katalog_dict = {}  # словарь книг
 frasa = str()  # переменная для ввода
 
 
-def dobavlenie_udalenie(kniga, operation="add"):
+def dobavlenie_udalenie(kniga: str, operation: str) -> None:
     """
     Добавление/удаление книги в библитотеку
     :param kniga: str
@@ -77,7 +77,7 @@ def dobavlenie_udalenie(kniga, operation="add"):
     return None
 
 
-def poisk_knigi(kniga):
+def poisk_knigi(kniga: str) -> None:
     """
     Функция поиска книг в библиотеке, поддерживает возможность поиска по автору, году, названию
     :param kniga: str
