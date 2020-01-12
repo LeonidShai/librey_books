@@ -120,14 +120,16 @@ def poisk_knigi(kniga: str) -> None:
         # поиск всех произведений по году
         elif kniga[0].isdigit():
             god = kniga[0]
+            flag = False
             for avtor in katalog_dict:
                 if god in katalog_dict[avtor]:
+                    flag = True
                     print(f"{avtor} в {god} написал:")
                     for i in katalog_dict[avtor][god]:
                         print(i)
                     print()
-                else:
-                    print("В таком году произведений нет ни у одного автора.")
+            if not flag:
+                print("В таком году произведений нет ни у одного автора.")
 
         # поиск автора и года по названию произведения
         else:
@@ -160,7 +162,7 @@ def poisk_knigi(kniga: str) -> None:
     return None
 
 
-def console_vvod():
+def console_vvod() -> str:
     """
     Ввод с консоли названия книг, авторов, операций
     :return: str
@@ -170,7 +172,7 @@ def console_vvod():
     return frasa
 
 
-def zapusk():
+def zapusk() -> None:
     """
     Выбор и запуск программ
     :return: None
