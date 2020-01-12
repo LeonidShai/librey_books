@@ -4,9 +4,20 @@
 """
 
 import json
+import subprocess
 
 katalog_dict = {}  # словарь книг
 frasa = str()  # переменная для ввода
+
+
+def console_vvod() -> str:
+    """
+    Ввод с консоли названия книг, авторов, операций
+    :return: str
+    """
+    global frasa
+    frasa = input("Ввод: ")
+    return frasa
 
 
 def dobavlenie_udalenie(kniga: str, operation: str) -> None:
@@ -87,6 +98,7 @@ def poisk_knigi(kniga: str) -> None:
     with open("knigi.json", "r") as file:
         katalog_dict = json.load(file)
 
+    ssilka = ".txt"  # переменная для открытия файла с текстом
     # вытаскивание автора, названия и года
     kniga = kniga.split(", ")
 
@@ -97,7 +109,8 @@ def poisk_knigi(kniga: str) -> None:
         god = kniga[2]
         if avtor in katalog_dict and god in katalog_dict[avtor]:
             if nazvanie in katalog_dict[avtor][god]:
-                print("Есть такая книга")
+                print("Есть такая книга!")
+                ssilka = nazvanie + ssilka
             else:
                 print("Данного произведения этого автора в библиотеке нет")
         elif god not in katalog_dict[avtor]:
@@ -144,9 +157,11 @@ def poisk_knigi(kniga: str) -> None:
                         break
             if avtor and god is not None:
                 print(f"{nazvanie}, {avtor}, {god}")
+                ssilka = nazvanie + ssilka
             else:
                 print("Видимо, нет такого произведения в нашей библиотеке.")
 
+    # поиск по автору и году, вывод всех произведений
     elif len(kniga) == 2:
         avtor = kniga[0]
         god = kniga[1]
@@ -159,17 +174,14 @@ def poisk_knigi(kniga: str) -> None:
     else:
         print("Нет такой книги в библиотеке")
 
+    # открытие файла
+    if ssilka != ".txt":
+        print("Открыть книгу? (yes/no)")
+        open_perem = console_vvod()
+        if open_perem == "yes":
+            subprocess.Popen(["gedit", ssilka])
+
     return None
-
-
-def console_vvod() -> str:
-    """
-    Ввод с консоли названия книг, авторов, операций
-    :return: str
-    """
-    global frasa
-    frasa = input("Ввод: ")
-    return frasa
 
 
 def zapusk() -> None:
@@ -200,7 +212,7 @@ def zapusk() -> None:
 
 
 if __name__ == "__main__":
-    # kn_a_g = "Ostrie britvi, Moem U.S., 1944"
+    # kn_a_g = "Ya vas lubil, Pushkin A.S., 1829"
     # op = "del"
     # dobavlenie_udalenie(kn_a_g)
     # console_vvod()
