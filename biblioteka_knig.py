@@ -218,4 +218,5 @@ if __name__ == "__main__":
     # console_vvod()
     # poisk_knigi(kn_a_g)
     zapusk()
+    #print("hello world")
 
